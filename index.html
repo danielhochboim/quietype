@@ -370,6 +370,22 @@ html[data-theme="dark"] #rsvpFrame .rsvp-idle,html[data-theme="dark"] #rsvpFrame
 .qt-quiz{max-width:720px;margin:auto;text-align:start}.qt-quiz .qcard{min-width:0;border:1px solid var(--line);border-radius:12px;padding:16px;margin:20px 0}.qt-quiz legend{font-weight:600;padding:0 6px;max-width:100%}.qt-quiz .qopt{text-align:start;white-space:normal}.qt-quiz details{margin:12px 0;color:var(--ink-soft);font-size:14px}.qt-quiz details p{line-height:1.8}.qt-quiz .qt-feedback{margin:14px 0}.qt-quiz{color:var(--ink)}.qt-quiz .qopt{background:var(--card-2);color:var(--ink);border-color:var(--line)}.qt-quiz .qopt.sel{border-color:var(--cobalt);background:var(--cobalt-soft)}.qt-quiz .qopt.right{border-color:var(--green);background:var(--green-soft)}.qt-quiz .qopt.bad{border-color:var(--magenta);background:var(--magenta-soft)}.qt-quiz button:disabled{opacity:1}
 #readerStage:has(.qt-quiz){background:var(--card)}html[dir="rtl"] .qt-table table{text-align:right}html[dir="rtl"] .quickstart li{margin-left:0;margin-right:16px}html[dir="rtl"] .qopt{text-align:right}html[dir="rtl"] .schulte-grid{direction:ltr}#rsvpQuiz{scroll-margin-top:90px}.qt-focus #rsvpQuiz{display:block}.qt-focus #rsvpQuiz.hide{display:none}
 @media(max-width:640px){.topbar-inner{gap:8px;flex-wrap:wrap}.toolbar{gap:6px}#qtLanguage{font-size:13px;max-width:90px}.rsvp-meta{gap:8px}.wpm-display{font-size:15px}.qt-quiz .qcard{padding:12px}.qt-focus #rsvpStage{min-height:35vh}}
+/* Compact, responsive content selection */
+.qt-source-card{min-width:0}.qt-source-card>.field{margin-bottom:0!important}
+#rsvpSourceSeg,#spSourceSeg{display:grid;width:100%;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;margin:10px 0 14px!important}
+#spSourceSeg{grid-template-columns:repeat(2,minmax(0,1fr))}
+#rsvpSourceSeg button,#spSourceSeg button{min-width:0;min-height:44px;padding:10px 6px;line-height:1.35;font-size:13px}
+.qt-library-brief{font-size:13px;line-height:1.65;color:var(--ink-soft);margin:0 0 8px}.qt-library-details{font-size:13px;line-height:1.7}
+.qt-library-details summary{cursor:pointer;color:var(--muted);padding:8px 0;min-height:40px}.qt-library-details p{margin:4px 0 0}
+#rsvpLiveStoriesStatus:empty,#qtTextInfo:empty,#rsvpWordCount:empty,#spStatus:empty{display:none!important}
+#rsvpContentSeg{display:flex;flex-wrap:wrap;max-width:100%}#rsvpContentSeg button{flex:1;min-width:85px}
+@media(max-width:640px){.qt-source-card{padding:18px!important}#rsvpFrame .rsvp-stage{min-height:220px;padding:30px 16px}
+#view-rsvp>.controls-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+#view-rsvp>.controls-row>.btn{width:100%;min-width:0;min-height:44px;padding:10px 6px;font-size:13px}
+#view-rsvp>.controls-row>.seg{grid-column:span 2;display:flex;align-items:center;justify-content:space-between;min-width:0;min-height:44px}
+#view-rsvp>.controls-row>.seg button{padding:8px 5px;flex:none;font-size:12px}.wpm-display{min-width:0;font-size:13px;white-space:nowrap}
+.qt-focus #rsvpFrame .rsvp-stage{min-height:45vh}.qt-library-details summary{min-height:44px}
+}
 </style>
 </head>
 <body>
@@ -442,7 +458,7 @@ html[data-theme="dark"] #rsvpFrame .rsvp-idle,html[data-theme="dark"] #rsvpFrame
 
     <div id="rsvpQuiz" class="card qt-panel hide"></div>
     <div class="split">
-      <div class="card" style="padding:22px">
+      <div class="card qt-source-card" style="padding:22px">
         <div class="field" style="margin-bottom:14px">
           <label data-i18n="rsvp.textLabel">Reading text</label>
           <div class="seg" id="rsvpSourceSeg" style="margin-bottom:10px">
@@ -467,7 +483,7 @@ html[data-theme="dark"] #rsvpFrame .rsvp-idle,html[data-theme="dark"] #rsvpFrame
           </div>
 
           <div id="rsvpLiveStoriesBox">
-            <div class="muted" style="font-size:13px" data-i18n="rsvp.liveStoriesNote">147 classic Aesop's fables (public domain), fetched once from a community-published collection on GitHub — then drawn one at a time, never repeating until all 147 have appeared. English only for now; Hebrew falls back to the built-in story library below.</div>
+            <p class="qt-library-brief" data-i18n="library.brief">600 story variations · 3 questions each</p><details class="qt-library-details"><summary data-i18n="library.details">About this library</summary><p class="muted" data-i18n="rsvp.liveStoriesNote"></p></details>
             <div class="muted" id="rsvpLiveStoriesStatus" style="font-size:13px;margin-top:6px;min-height:18px"></div>
           </div>
 
@@ -732,7 +748,7 @@ html[data-theme="dark"] #rsvpFrame .rsvp-idle,html[data-theme="dark"] #rsvpFrame
       </div>
 
       <div class="muted hide" id="spSampleNote" style="font-size:13px;margin-top:14px" data-i18n="speed.randomNote">A random passage is chosen each time you start the test, never repeating until you've seen all of them.</div>
-      <div class="muted" id="spLiveStoriesNote" style="font-size:13px;margin-top:14px" data-i18n="speed.liveStoriesNote">147 classic Aesop's fables (public domain), live from the web. About a fifth of them include a real comprehension quiz I wrote myself — the rest are speed-only. English only; Hebrew uses the built-in story library instead.</div>
+      <div id="spLiveStoriesNote"><p class="qt-library-brief" data-i18n="library.brief">600 story variations · 3 questions each</p><details class="qt-library-details"><summary data-i18n="library.details">About this library</summary><p class="muted" data-i18n="speed.liveStoriesNote"></p></details></div>
       <div class="muted" id="spStatus" style="font-size:13px;margin-top:8px;min-height:18px"></div>
     </div>
   </section>
@@ -2153,6 +2169,8 @@ Object.assign(STR.he,{
 });
 STR.he['guide.h2']='תרגול בעזרת מילים מתחלפות';
 STR.he['guide.expect']=STR.he['guide.expect'].replaceAll('RSVP','אימון במילים מתחלפות').replace('בעבדתם','עיבדתם');
+Object.assign(STR.en,{'rsvp.srcLiveStories':'Stories','speed.srcLiveStories':'Stories','rsvp.srcSample':'Passages','speed.srcSample':'Passages','rsvp.srcOwn':'My text','library.brief':'600 story variations · 3 questions each','library.details':'About this library'});
+Object.assign(STR.he,{'rsvp.srcLiveStories':'סיפורים','speed.srcLiveStories':'סיפורים','rsvp.srcSample':'קטעים','speed.srcSample':'קטעים','rsvp.srcOwn':'טקסט שלי','library.brief':'600 גרסאות סיפור · 3 שאלות לכל גרסה','library.details':'על המאגר'});
 const qtTextTranslations={
  'Progress':'התקדמות','Your practice, over time':'התרגול שלך לאורך זמן','Small sessions. Steady progress.':'תרגול קצר. התקדמות מתמשכת.',
  'Track completed practice and reading comprehension. Everything stays in this browser.':'מעקב אחר תרגולים שהושלמו והבנת הנקרא. הכול נשמר בדפדפן הזה.',
